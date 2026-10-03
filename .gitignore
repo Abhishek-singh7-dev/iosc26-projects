@@ -1,0 +1,30 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Arduino / build output
+build/
+*.elf
+*.hex
+*.bin
+
+# Node
+node_modules/
+
+# Secrets - never commit these
+*.pem
+*.key
+secrets.*
