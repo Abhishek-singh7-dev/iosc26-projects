@@ -1,10 +1,10 @@
 <div align="center">
 
-# ⬡ Team i5 · Stage 2 · The Build Round
+# Team i5 · Stage 2 · The Build Round
 
 **Intel oneAPI Club · USAR @ GGSIPU EDC**
 
-_"Talk is cheap. Show me the code."_ — Linus Torvalds
+<img width="192" height="208" alt="miku-waving" src="https://github.com/user-attachments/assets/f3fbf7ff-20eb-4191-a8ef-85b4acb61679" />
 
 ![Shortlisted](https://img.shields.io/badge/shortlisted-15-0071C5?style=for-the-badge)
 ![Tracks](https://img.shields.io/badge/tracks-5-00C7FD?style=for-the-badge)
