@@ -103,9 +103,6 @@ git push origin firstname-lastname
 2. Title it like: `[firstname-lastname] Your Project Title`
 3. Fill in the checklist that appears, then click **Create pull request**.
 
-### Step 7 · Keep improving (optional) 🔁
-
-Need to fix or add something after opening the PR? Just commit and push to the **same branch** again. The PR updates automatically. No need to open a new one.
 
 > 🖱️ **Not comfortable with commands?** [GitHub Desktop](https://desktop.github.com/) does all of the above with buttons. Or, as a last resort, on your fork use **Add file → Upload files** (inside your own folder), then **Contribute → Open pull request**.
 
