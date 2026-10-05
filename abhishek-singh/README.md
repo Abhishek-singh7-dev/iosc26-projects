@@ -15,12 +15,6 @@
 
 > A privacy-first cybersecurity utility that evaluates password entropy, detects structural heuristic patterns, and verifies data-breach exposure through the Have I Been Pwned (HIBP) k-Anonymity API.
 
-**Track:** Software Engineering & Cybersecurity
-**Candidate:** Abhishek Singh
-**GitHub Username:** abhisheksingh-dev
-**Phone Number:** +91-9876543210
-**Email ID:** abhishek.singh.dev@example.com
-
 ---
 
 ## 1. Overview
