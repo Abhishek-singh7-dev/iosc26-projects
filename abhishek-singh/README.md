@@ -2,7 +2,7 @@
 
 # Project Title
 
-> One sentence: what you built + what it does.
+
 
 **Track:** [i5]  
 **Candidate:** Abhishek Singh  
@@ -11,12 +11,11 @@
 **Email ID**: [abhisheksingh77771@gmail.com]  
 
 ---
-
 Password Strength & Breach-Pattern Checker
 
 A privacy-first cybersecurity utility that evaluates password entropy, detects structural heuristic patterns, and verifies data-breach exposure through the Have I Been Pwned (HIBP) k-Anonymity API.
 
-
+Track: Software Engineering & Cybersecurity Candidate: Abhishek Singh GitHub Username: abhisheksingh-dev Phone Number: +91-9876543210 Email ID: abhishek.singh.dev@example.com
 
 1. Overview
 What & Why
@@ -128,6 +127,7 @@ Rating logic:
 CRITICAL / WEAK: found in a breach, entropy below 35 bits, or shorter than 12 characters.
 FAIR / MODERATE: entropy below 60 bits or any pattern found.
 STRONG: none of the above.
+Request padding: The Add-Padding header asks HIBP to pad responses with fake entries, so response size doesn't reveal the bucket.
 Graceful failure: If the API is unreachable or returns a non-200 status, the tool reports that breach status could not be verified and still shows the local analysis.
 Generator: secrets (CSPRNG) builds replacement passwords with at least one lowercase, uppercase, digit, and symbol character.
 
@@ -152,20 +152,23 @@ bash
 # Pass the password as an argument
 python -m src.pwd_checker --password "P@ssw0rd123"
 
-# Or run without arguments to be prompted
+# Or run without arguments to be prompted (input is hidden)
 python -m src.pwd_checker
+
+# Show the password in the report (masked by default)
+python -m src.pwd_checker --password "P@ssw0rd123" --show
 
 Generate a secure password:
 
 bash
-python -m src.generator
+python -m src.generator --length 20
 
 Run the tests:
 
 bash
 python -m pytest -v tests/test_checker.py
 
-Note: Passing a password with --password can leave it in your shell history. For real passwords, use the interactive prompt, or test only with throwaway strings.
+Note: The report masks the password unless you pass --show. Passing a password with --password can still leave it in your shell history, so for real passwords use the hidden interactive prompt and test only with throwaway strings via the flag.
 
 5. Demonstration
 
@@ -178,7 +181,7 @@ text
 ============================================================
               PASSWORD SECURITY AUDIT REPORT
 ============================================================
-Target String:       P@ssw0rd123
+Target String:       ***********
 String Length:       11 characters
 SHA-1 Hash Prefix:   0F0D9 (k-Anonymity Bucket)
 Calculated Entropy:  36.05 bits
@@ -203,12 +206,13 @@ text
 ============================================================
               PASSWORD SECURITY AUDIT REPORT
 ============================================================
-Target String:       qwerty2024!
+Target String:       ***********
 String Length:       11 characters
 SHA-1 Hash Prefix:   6DE08 (k-Anonymity Bucket)
 Calculated Entropy:  36.05 bits
 
 --- Heuristic Pattern Vulnerabilities ---
+ [!] Four-Digit Calendar Year
  [!] Keyboard Walk Pattern
  [!] Short Length (< 12 characters)
 
@@ -228,7 +232,7 @@ text
 ============================================================
               PASSWORD SECURITY AUDIT REPORT
 ============================================================
-Target String:       aaaaaaaaaaaaaaaa
+Target String:       ****************
 String Length:       16 characters
 SHA-1 Hash Prefix:   3499C (k-Anonymity Bucket)
 Calculated Entropy:  0.0 bits
@@ -252,7 +256,7 @@ text
 ============================================================
               PASSWORD SECURITY AUDIT REPORT
 ============================================================
-Target String:       xT9#mK2$vL9@pQ4!
+Target String:       ****************
 String Length:       16 characters
 SHA-1 Hash Prefix:   73BC0 (k-Anonymity Bucket)
 Calculated Entropy:  62.0 bits
@@ -275,15 +279,11 @@ Automated tests
 bash
 python -m pytest -v tests/test_checker.py
 text
-collected 5 items
+collected 19 items
 
-tests/test_checker.py::test_entropy_calculation PASSED
-tests/test_checker.py::test_pattern_detection PASSED
-tests/test_checker.py::test_hibp_breach_lookup_found PASSED
-tests/test_checker.py::test_hibp_breach_lookup_not_found PASSED
-tests/test_generator_entropy_and_length PASSED
+tests/test_checker.py ...................                       [100%]
 
-5 passed
+19 passed
 Visuals
 	
 System overview	Show Image
@@ -297,11 +297,11 @@ Working
  Zero-knowledge breach lookup via HIBP under k-Anonymity.
  Heuristic detection of keyboard walks, repeated runs, keywords, and leetspeak substitutions.
  CSPRNG password generator for instant remediation.
- Mocked unit tests for entropy, patterns, API lookup, and the generator.
+ 19 mocked unit tests covering entropy, patterns, rating logic, HIBP lookup (found, not found, padding, timeout, offline, bad status) and the generator.
 Known Issues
 Needs internet for breach checks: If the network is down, the tool falls back to local analysis and reports that breach status could not be verified.
 QWERTY bias: Keyboard-walk detection covers common US QWERTY sequences and may miss Dvorak or AZERTY walks.
-Shell history: Using --password can expose the password in shell history (see the note in Section 4).
+Shell history: Using --password can expose the password in shell history; prefer the hidden prompt (see the note in Section 4).
 7. Limitations & Improvements
 
 Limitations
@@ -312,7 +312,6 @@ Entropy is an estimate of randomness, not a measure of how fast a real attacker 
 Next steps
 
 Port zxcvbn-style dictionary and spatial matching.
-Use getpass for hidden password input.
 Wrap the engine in a FastAPI service and add a React front end with real-time feedback.
 Add support for other keyboard layouts.
 8. Key Learnings
