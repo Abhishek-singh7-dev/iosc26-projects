@@ -384,7 +384,7 @@ Demo video: [`media/demo_video.mp4`](media/demo_video.mp4)
 - **Math vs. behavior:** Entropy alone is misleading; a password can be long and still predictable, so pattern analysis has to complement it.
 - **Defensive error handling:** Cloud-dependent tools need timeouts and offline fallbacks so a network failure never crashes the application.
 - **Testing with mocks:** Mocking `requests.get` lets the breach logic be tested deterministically without hitting the real API.
-
+```text
 ---
 
 ## 9. Repository Structure
